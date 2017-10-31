@@ -3,9 +3,9 @@
 unsigned long startmillis=0; // declare startmillis in unsigned long data type, initial at zero
 unsigned long lastmillis=0; // declare lastmililis in unsigned long data type, initial at zero
 unsigned long calmillis=0; // declare calmillis in unsigned long data type, initial at zero
-float BPM=0; // delcare BPM in float data type , intial at 0 
+float BPM = 0; // delcare BPM in float data type , intial at 0 
 const int pin =2;
-int state=0;
+bool state = false;
 void setup() 
 {
     Serial.begin(115200); // initial serial monitor at baud rate of 115200.For effectiveserial communication 
@@ -23,14 +23,14 @@ else will count as 0 */
     //as output equal to 1, last millis = startmillis. at intial =0. If dtect another logic high lastmililis wil store previous logic low millis() value
     while(digitalRead(2)==1) 
     { 
-        state=1;
+        state = true;
         lastmillis=startmillis;
     }
 
     // startmilis() store value of millis() once it detect logic low(heart beat)
     while(digitalRead(2)==0) 
     {   
-        state=0;
+        state = false;
         startmillis=millis();
     }
 
